@@ -204,9 +204,15 @@ function normalizeHermesConfig<T extends { config?: unknown; agent?: unknown }>(
 
   if (config && !config.hermesCommand && configCommand) {
     config.hermesCommand = configCommand;
+  } else if (config && !config.hermesCommand) {
+    // Default to full path so Paperclip systemd service can find it
+    config.hermesCommand = "/home/siddhi/.local/bin/hermes";
   }
   if (agentAdapterConfig && !agentAdapterConfig.hermesCommand && agentCommand) {
     agentAdapterConfig.hermesCommand = agentCommand;
+  } else if (agentAdapterConfig && !agentAdapterConfig.hermesCommand) {
+    // Default to full path so Paperclip systemd service can find it
+    agentAdapterConfig.hermesCommand = "/home/siddhi/.local/bin/hermes";
   }
 
   return ctx;
