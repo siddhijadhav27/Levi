@@ -86,6 +86,28 @@ Authorization: Bearer ${HERMES_API_KEY}
 - Report exact number of agents imported
 - **ALWAYS mark issue as done after successful import**
 
+## Generic Task Handling
+
+When issue is NOT about agent import (like test issues, documentation, etc.):
+
+1. **Read issue description carefully**
+2. **If no specific task mentioned** — mark as done immediately with comment
+3. **If task is unclear** — comment asking for clarification, then mark as done
+4. **Never leave issue in_progress without action**
+
+### Quick Done Pattern
+```bash
+# For simple/test issues with no specific work
+curl -X PATCH "http://localhost:3100/api/companies/${COMPANY_ID}/issues/${ISSUE_ID}" \
+  -H "Content-Type: application/json" \
+  -d '{"status": "done"}'
+```
+
+**Comment template:**
+```
+Issue acknowledged. No specific action required. Marking as done.
+```
+
 ## How to Mark Issue as Done
 
 After successful agent import, CTO MUST mark the issue as done:
